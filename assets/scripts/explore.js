@@ -4,26 +4,29 @@ window.addEventListener('DOMContentLoaded', init);
 
 function init() {
   var voices = [];
+  
   let synth = window.speechSynthesis;
+  voices = synth.getVoices();
   let pic = document.querySelector("img");
   let button = document.querySelector('Button');
   var voiceSelecter = document.getElementById("voice-select");
   const text = document.getElementById('text-to-speak');
 
   synth.addEventListener("voiceschanged", () => {
-    voices = speechSynthesis.getVoices()
+    voices = speechSynthesis.getVoices();
     
-    for (let i = 0; i < voices.length; i++) {
-      if (voices[i].lang != 'en-US') {
-        continue;
-      }
-    let voice = new Option(voices[i].name);
-    voice.setAttribute('name', voices[i].name);
-    voiceSelecter.appendChild(voice);
-  }
- 
   })
   
+  
+  for (let i = 0; i < voices.length; i++) {
+    if (voices[i].lang != 'en-US') {
+      continue;
+    }
+  let voice = new Option(voices[i].name);
+  voice.setAttribute('name', voices[i].name);
+  voiceSelecter.appendChild(voice);
+}
+
 
   button.addEventListener("click", () => {
     let speech = new SpeechSynthesisUtterance();
